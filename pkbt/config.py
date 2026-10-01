@@ -17,6 +17,8 @@ MGBA_DEV = CONFIG["emulator"]["mgba_dev"]
 
 """ROMS"""
 POKEMON_RED_ROM = REPO_ROOT / CONFIG["roms"]["pokemon_red"]
+POKEMON_RED_GB_ROM = REPO_ROOT.parent / "ROMs" / "GB" / "Eng" / "Eng_Red.gb"
+POKEMON_TRANSPORTER_GBA = REPO_ROOT.parent / "Poke_Transporter_GB" / "Poke_Transporter_GB_mb.gba"
 POKEMON_SAPPHIRE_ROM = REPO_ROOT / CONFIG["roms"]["pokemon_sapphire"]
 POKEMON_EMERALD_ROM = REPO_ROOT / CONFIG["roms"]["pokemon_emerald"]
 

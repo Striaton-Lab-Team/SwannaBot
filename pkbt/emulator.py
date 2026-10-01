@@ -3,9 +3,9 @@ import subprocess
 
 class EmulatorProc:
 
-    def __init__(self, exe: Path, rom: Path, scripts: list[Path] | None = None) -> None:
+    def __init__(self, exe: Path, roms: list[Path], scripts: list[Path] | None = None) -> None:
         self.exe = exe
-        self.rom = rom
+        self.roms = roms
         self.scripts = scripts
 
     def start(self) -> bool:
@@ -17,7 +17,7 @@ class EmulatorProc:
         p = subprocess.Popen([
             str(self.exe),
             *scripting_args,
-            str(self.rom)
+            *[str(rom) for rom in self.roms]
         ])
 
         if p is None:
@@ -45,11 +45,22 @@ class EmulatorProc:
 if __name__ == "__main__":
 
     import time
-    from pkbt.config import MGBA_DEV, POKEMON_RED_ROM, INPUT_DISPLAY_SCRIPT, SERVER_SCRIPT
-
-    e = EmulatorProc(
+    from pkbt.config import (
         MGBA_DEV,
         POKEMON_RED_ROM,
+        INPUT_DISPLAY_SCRIPT,
+        SERVER_SCRIPT,
+        REPO_ROOT
+    )
+
+    gba_rom = REPO_ROOT.parent / "ROMs" / "GBA" / "Eng" / "Eng_Emerald.gba"
+    gb_rom = REPO_ROOT.parent / "ROMs" / "GB" / "Eng" / "Eng_Red.gb" 
+    e = EmulatorProc(
+        MGBA_DEV,
+        [
+            gba_rom,
+            gb_rom
+        ],
         [INPUT_DISPLAY_SCRIPT, SERVER_SCRIPT]
     )
 
